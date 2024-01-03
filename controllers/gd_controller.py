@@ -75,13 +75,15 @@ async def getStatus(station):
 async def getTotalWorkTime(start,end,station):
     return get_station_working_status_interval(start, end, station)
 
-@route.get()
+@route.get("/getTotalProduction", response_description="Get total piece production", 
+            status_code=status.HTTP_200_OK)
 async def getTotalProduction(start, end):
     resultado = query_time_and_value_in_mongo(start=start, end=end)
     aux_dict = create_dict_with_tupled_values(resultado)
     return total_production(aux_dict)
 
-@route.get()
+@route.get("/getTotalFails", response_description="Get total stops", 
+            status_code=status.HTTP_200_OK)
 async def getTotalFails(start, end):
     resultado = query_time_and_value_in_mongo(start=start, end=end)
     aux_dict = create_dict_with_tupled_values(resultado)
