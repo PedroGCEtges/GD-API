@@ -1,32 +1,32 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import io
 
-def generate_graphs(final_dict):
-    fig, axes = plt.subplots(len(final_dict)//2, 2, figsize=(10, 10))
-    labels = ['Tempo de Operação', 'Tempo Ocioso']
+# def generate_graphs(final_dict):
+#     fig, axes = plt.subplots(len(final_dict)//2, 2, figsize=(10, 10))
+#     labels = ['Tempo de Operação', 'Tempo Ocioso']
 
-    for i, (key, value) in enumerate(final_dict.items()):
-            # Obter o índice da linha e da coluna do eixo atual
-            row = i // 2
-            col = i % 2
-            # Obter os valores relativos do dicionário
-            try:
-                data = list(value['Relativos'].values())
-            except Exception as e:
-                print(value)
-                print(type(value))
-            # Plotar o gráfico de pizza no eixo atual
-            axes[row, col].pie(data, labels=labels, autopct='%.2f%%', shadow=True)
-            # Adicionar o título do eixo com a chave do dicionário
-            axes[row, col].set_title(key)
+#     for i, (key, value) in enumerate(final_dict.items()):
+#             # Obter o índice da linha e da coluna do eixo atual
+#             row = i // 2
+#             col = i % 2
+#             # Obter os valores relativos do dicionário
+#             try:
+#                 data = list(value['Relativos'].values())
+#             except Exception as e:
+#                 print(value)
+#                 print(type(value))
+#             # Plotar o gráfico de pizza no eixo atual
+#             axes[row, col].pie(data, labels=labels, autopct='%.2f%%', shadow=True)
+#             # Adicionar o título do eixo com a chave do dicionário
+#             axes[row, col].set_title(key)
 
-    buf = io.BytesIO()
-    plt.savefig(buf, format="png")
+#     buf = io.BytesIO()
+#     plt.savefig(buf, format="png")
     
-    image = UploadFile(filename="graph.png",file=buf)
-    return FileResponse(image.file, media_type="image/png")
+#     image = UploadFile(filename="graph.png",file=buf)
+#     return FileResponse(image.file, media_type="image/png")
 
 def total_production(aux_dict):
     def classify_piece(red, aux_dict, count): 
