@@ -6,7 +6,7 @@ class Tag(BaseModel):
     name: str = Field(...)
     datetime: datetime.datetime
     tipo: Literal["int", "bool"]
-    value:  int | bool
+    value:  int or bool
 
 
     @validator("tipo")
