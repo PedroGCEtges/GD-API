@@ -34,9 +34,15 @@ def get_user(db, username: str):
     else:
         raise HTTPException(status_code=404, detail=f'User {username} not found')
 
-
+def get_user_by_email(db, email: str):
+    user = db.find_one({"email": email})
+    if user:
+        return UserInDB(**user)
+    else:
+        raise HTTPException(status_code=404, detail=f'User {email} not found')
+    
 def authenticate_user(db, username: str, password: str):
-    user = get_user(db, username)
+    user = get_user_by_email(db, username)
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
