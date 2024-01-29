@@ -52,7 +52,7 @@ def get_station_status(collection):
     result_list = list(result)
     if result_list[0] == 0:
         print(result_list)
-        return "Estação parada"
+        return "Estação parada", result_list
     
     else:
         return "Estação operando"
