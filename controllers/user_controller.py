@@ -17,7 +17,7 @@ route = APIRouter()
 @route.post("/login", response_model=Token)
 async def login(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
-):
+):  
     user = authenticate_user(user_collection(), form_data.username, form_data.password)
     if not user:
         raise HTTPException(
