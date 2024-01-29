@@ -49,7 +49,9 @@ def get_station_status(collection):
     else: 
         result = query_aggregation(collection)
 
-    if result["value"] == 0:
+    result_list = list(result)
+    if result_list[0] == 0:
+        print(result_list)
         return "Estação parada"
     
     else:
