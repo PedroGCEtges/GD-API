@@ -1,4 +1,4 @@
-from fastapi.security import OAuth2PasswordRequestForm
+# from fastapi.security import OAuth2PasswordRequestForm
 from controllers.gd_controller import stop_station
 from controllers.user_controller import create_user, delete_user, login
 import asyncio
@@ -23,8 +23,8 @@ user1 = {"username": "User2", "email": "test11124111e@ts.ce","role": "admin"}
 # test_user = User(**user1)
 
 
-user = OAuth2PasswordRequestForm(**atr1)
-teste = asyncio.run(login(user))
+# user = OAuth2PasswordRequestForm(**atr1)
+# teste = asyncio.run(login(user))
 # print(teste['access_token'])
 
 # test = asyncio.run(delete_user(User(**user1),asyncio.run(get_current_user(teste['access_token']))))
@@ -34,7 +34,7 @@ teste = asyncio.run(login(user))
 
 # r = requests.get('http://127.0.0.1:8000/gd/getAllStatus')
 # print(r)
-r1 = requests.post('http://127.0.0.1:8000/users/login', data=atr1)
+r1 = requests.post('https://gd-api-liard.vercel.app/users/login', data=atr1)
 token = r1.json()["access_token"]
 
 headers = {"Authorization": f"Bearer {token}"}
@@ -78,12 +78,12 @@ atr = {"name": "Distributing",
 station = Station(**atr)
 teste_1 = gd_station_collection("Distributing")
 teste_1.insert_one(station.model_dump())
-
 ultimo_documento = teste_1.find_one(sort=[('datetime', -1)])
 
 # print(ultimo_documento)
 station = {"name": "Distributing"}
 
 # print(asyncio.run(stop_station(station["name"],asyncio.run(get_current_user(teste['access_token'])))))
-r = requests.post(f'http://127.0.0.1:8000/gd/stop_station',  params='station=Distributing', headers=headers)
+# r = requests.post(f'https://gd-api-liard.vercel.app/gd/stop_station',  params='station=Distributing', headers=headers)
+r = requests.get(f'https://gd-api-liard.vercel.app/gd/getStatus',  params='station=Distributing')
 print(r.content)

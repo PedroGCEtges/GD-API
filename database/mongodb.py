@@ -33,15 +33,21 @@ def get_tags_interval_date(start, end, collection):
         print(document)
     return documents
 # users.delete_one({"full_name": "admin"})
-
-def get_station_status(collection):
-    result = collection.aggregate([
+def query_aggregation(collection):
+    return collection.aggregate([
         {"$sort": {"timestamp": -1}}, # Ordenar os documentos pelo timestamp em ordem decrescente
         {"$limit": 1}, # Limitar o número de documentos retornados para apenas um
         {"$project": {"tags": 1}}, # Retornar apenas o campo tags do documento selecionado
         {"$project": {"tags": {"$filter": {"input": "$tags", "as": "tag", "cond": {"$eq": ["$$tag.name", "M_STATUS"]}}}}}, # Filtrar a lista de tags pelo nome da tag desejada
         {"$project": {"value": {"$first": "$tags.value"}}}
     ])
+
+def get_station_status(collection):
+    if isinstance(collection, str):
+        result = query_aggregation(gd_station_collection(collection))
+    
+    else: 
+        result = query_aggregation(collection)
 
     if result["value"] == 0:
         return "Estação parada"

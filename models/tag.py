@@ -20,8 +20,8 @@ class Tag(BaseModel):
         tipo = values.get("tipo")
         if tipo == "int" and not isinstance(v, int):
             raise TypeError("Valor deve ser int")
-        elif tipo == "bool" and not isinstance(v, bool):
-            raise TypeError("Valor deve ser bool")
+        elif tipo == "bool" and not (isinstance(v, bool) or isinstance(v,int)):
+            raise TypeError("Valor deve ser bool", v)
         return v
 
 class TagUpdate(Tag):
