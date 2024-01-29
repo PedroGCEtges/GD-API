@@ -55,7 +55,8 @@ def get_station_status(collection):
         return "Estação parada", result_list
     
     else:
-        return "Estação operando",  result_list
+        print(result_list)
+        return "Estação operando"
     
 
 def get_station_working_status_interval(start, end, station):
