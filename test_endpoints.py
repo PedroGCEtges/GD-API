@@ -92,7 +92,7 @@ ultimo_documento = teste_1.find_one(sort=[('datetime', -1)])
 
 # print(asyncio.run(stop_station(station["name"],asyncio.run(get_current_user(teste['access_token'])))))
 # r = requests.post(f'https://gd-api-liard.vercel.app/gd/stop_station',  params='station=Distributing', headers=headers)
-r = requests.get(f'https://gd-api-liard.vercel.app/gd/getStatus',  params='station=Distributing')
+r = requests.get(f'https://gd-api-liard.vercel.app/gd/getStatus',  params='station=DistTest')
 print(r.content)
 
 # # print(asyncio.run(stop_station(station["name"],asyncio.run(get_current_user(teste['access_token'])))))
