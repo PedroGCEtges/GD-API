@@ -35,7 +35,7 @@ def get_tags_interval_date(start, end, collection):
 # users.delete_one({"full_name": "admin"})
 def query_aggregation(collection):
     return collection.aggregate([
-        {"$sort": {"timestamp": -1}}, # Ordenar os documentos pelo timestamp em ordem decrescente
+        {"$sort": {"datetime": -1}}, # Ordenar os documentos pelo timestamp em ordem decrescente
         {"$limit": 1}, # Limitar o número de documentos retornados para apenas um
         {"$project": {"tags": 1}}, # Retornar apenas o campo tags do documento selecionado
         {"$project": {"tags": {"$filter": {"input": "$tags", "as": "tag", "cond": {"$eq": ["$$tag.name", "M_STATUS"]}}}}}, # Filtrar a lista de tags pelo nome da tag desejada
@@ -48,6 +48,7 @@ def get_station_status(collection):
     
     else: 
         result = query_aggregation(collection)
+
 
     result_list = list(result)
     if result_list == 0:
